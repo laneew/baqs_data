@@ -1,0 +1,249 @@
+<h1>FIDAS Particulate Matter Data (&mu;g/m<sup>3</sup>)</h1>
+
+<ul>
+    <li>PM1.0</li>
+    <li>PM2.5</li>
+    <li>PM10</li>
+</ul>
+
+[Flags: 0b - No data; 1b - Good Data; 2b - Bad Data; 3b - Suspect; 4b - Local Influence.]
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
+
+<script>
+const sources = [
+    {
+        path: "fidas/PM/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "fidas/PM/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
+
+/*
+  IMPORTANT:
+  No GitHub API used anymore.
+  You maintain file lists manually here.
+*/
+const fileIndex = {
+    "fidas/PM/csv": [
+        // Add CSV filenames here
+		   "BAQS_FIDAS_PM_201905_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201906_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201907_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201908_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201909_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201910_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201911_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_201912_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202001_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202002_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202003_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202004_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202005_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202006_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202007_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202008_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202009_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202010_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202011_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202012_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202101_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202102_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202103_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202104_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202105_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202106_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202107_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202112_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202203_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202204_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202205_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202206_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202207_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202208_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202209_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202210_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202211_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202212_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202301_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202302_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202303_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202304_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202305_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202401_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202402_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202403_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202404_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202405_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202406_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202407_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202408_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202409_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202410_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202411_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202412_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202501_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202502_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202503_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202504_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202505_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202506_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202507_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202508_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202509_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202510_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202511_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202512_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202601_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202602_hourv_pm10_only_1.2.csv",
+		   "BAQS_FIDAS_PM_202603_hourv_pm10_only_1.2.csv"
+    ],
+    "fidas/PM/netcdf": [
+        // Add NetCDF filenames here
+		"BAQS_FIDAS_PM_concentration_201905_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201906_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201907_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201908_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201909_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201910_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201911_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_201912_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202001_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202002_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202003_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202004_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202005_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202006_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202007_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202008_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202009_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202010_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202011_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202012_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202101_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202102_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202103_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202105_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202106_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202107_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202112_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202203_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202204_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202205_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202206_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202207_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202208_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202209_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202210_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202211_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202212_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202301_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202302_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202303_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202304_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202305_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202401_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202402_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202403_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202404_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202405_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202406_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202407_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202408_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202409_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202410_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202411_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202412_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202501_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202502_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202503_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202504_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202505_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202506_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202507_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202508_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202509_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202510_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202511_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202512_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202601_Ratified_v2.2.nc",
+		"BAQS_FIDAS_PM_concentration_202603_Ratified_v2.2.nc"
+    ]
+};
+
+sources.forEach(source => {
+
+    const list = document.getElementById(source.listId);
+    const files = fileIndex[source.path] || [];
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
+            }
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+});
+</script>
