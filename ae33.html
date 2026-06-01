@@ -1,39 +1,112 @@
-<ul id="file-list"></ul>
+<h1>AE33 Aethalometer(ug/m3): BC_370_nm; BC_470_nm; BC_520_nm; BC_590_nm; BC_660_nm; BC_880_nm; BC_950_nm.</h1>
+Flags: 0b - No data; 1b - Good Data; 2b - Bad Data; 3b - Suspect; 4b - Local Influence.
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
 
 <script>
 const owner = "dcsbeddows";
 const repo = "baqs_data";
-const folder = "fidas";
 
-fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`)
-.then(r => r.json())
-.then(files => {
+const sources = [
+    {
+        path: "ae33/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "ae33/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
 
-    const list = document.getElementById("file-list");
+sources.forEach(source => {
 
-    files
-      .filter(f => f.name.endsWith(".csv"))
-      .sort((a,b) => a.name.localeCompare(b.name))
-      .forEach(f => {
+    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${source.path}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(files => {
 
-          const li = document.createElement("li");
-          const a = document.createElement("a");
+            const list = document.getElementById(source.listId);
 
-          // IMPORTANT: GitHub raw file
-          const url = `https://raw.githubusercontent.com/${owner}/${repo}/main/${folder}/${f.name}`;
+            files
+                .filter(file =>
+                    source.extensions.some(ext =>
+                        file.name.toLowerCase().endsWith(ext)
+                    )
+                )
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .forEach(file => {
 
-          a.href = url;
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
 
-          // This *suggests* download instead of open
-          a.setAttribute("download", f.name);
+                    const rawUrl =
+                        `https://raw.githubusercontent.com/${owner}/${repo}/main/${source.path}/${file.name}`;
 
-          a.textContent = "Download " + f.name;
+                    a.href = "#";
+                    a.textContent = file.name;
 
-          li.appendChild(a);
-          list.appendChild(li);
-      });
+                    a.addEventListener("click", async (e) => {
+                        e.preventDefault();
+
+                        try {
+                            const response = await fetch(rawUrl);
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP ${response.status}`);
+                            }
+
+                            const blob = await response.blob();
+                            const blobUrl = URL.createObjectURL(blob);
+
+                            const downloadLink = document.createElement("a");
+                            downloadLink.href = blobUrl;
+                            downloadLink.download = file.name;
+
+                            document.body.appendChild(downloadLink);
+                            downloadLink.click();
+                            document.body.removeChild(downloadLink);
+
+                            URL.revokeObjectURL(blobUrl);
+
+                        } catch (error) {
+                            console.error(`Download failed for ${file.name}:`, error);
+                            alert(`Unable to download ${file.name}`);
+                        }
+                    });
+
+                    li.appendChild(a);
+                    list.appendChild(li);
+                });
+
+            if (list.children.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = `No ${source.title} files found`;
+                list.appendChild(li);
+            }
+        })
+        .catch(error => {
+
+            console.error(`Error loading ${source.path}:`, error);
+
+            const list = document.getElementById(source.listId);
+
+            const li = document.createElement("li");
+            li.textContent =
+                `Unable to load files from ${source.path}`;
+
+            list.appendChild(li);
+        });
 });
 </script>
-
-<h2 style="color:red;">TEST UPDATE - v2</h2>
-<h2 style="color:red;">TEST UPDATE - v2</h2>
