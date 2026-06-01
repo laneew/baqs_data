@@ -19,9 +19,6 @@
 <ul id="netcdf-file-list"></ul>
 
 <script>
-const owner = "dcsbeddows";
-const repo = "baqs_data";
-
 const sources = [
     {
         path: "ae33/csv",
@@ -37,87 +34,240 @@ const sources = [
     }
 ];
 
+// IMPORTANT: file lists must be maintained manually (no GitHub API)
+const fileIndex = {
+    "ae33/csv": [
+        // ADD YOUR CSV FILE NAMES HERE
+        // Example:
+		   "BAQS_AE33_BC_UVC_201903_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201904_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201905_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201906_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201907_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201908_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201909_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201910_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201911_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_201912_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202001_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202002_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202003_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202004_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202005_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202006_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202007_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202008_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202009_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202010_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202011_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202012_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202101_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202102_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202103_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202104_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202105_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202106_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202107_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202108_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202109_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202110_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202201_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202202_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202203_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202204_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202207_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202208_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202210_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202211_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202212_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202301_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202302_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202303_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202304_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202305_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202306_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202307_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202308_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202309_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202310_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202311_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202312_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202401_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202402_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202403_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202404_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202405_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202406_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202407_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202408_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202409_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202410_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202411_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202412_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202501_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202502_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202503_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202504_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202505_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202506_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202507_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202508_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202509_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202510_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202511_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202512_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202601_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202602_hour_v1.0.csv",
+		   "BAQS_AE33_BC_UVC_202603_hour_v1.0.csv"
+    ],
+    "ae33/netcdf": [
+        // ADD YOUR NETCDF FILE NAMES HERE
+        // Example:
+		   "BAQS_AE33_black_carbon_201903_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201904_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201905_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201906_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201907_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201908_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201909_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201910_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201911_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_201912_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202001_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202002_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202003_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202004_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202005_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202006_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202007_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202008_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202009_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202010_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202011_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202012_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202101_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202102_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202103_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202104_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202105_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202106_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202107_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202108_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202109_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202110_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202201_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202202_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202203_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202204_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202207_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202208_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202210_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202211_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202212_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202301_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202302_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202303_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202304_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202305_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202306_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202307_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202308_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202309_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202310_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202311_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202312_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202401_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202402_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202403_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202404_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202405_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202406_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202407_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202408_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202409_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202410_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202411_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202412_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202501_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202502_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202503_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202504_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202505_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202506_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202507_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202508_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202509_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202510_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202511_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202512_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202601_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202602_Ratified_v2.2.nc",
+		   "BAQS_AE33_black_carbon_202603_Ratified_v2.2.nc"
+    ]
+};
+
 sources.forEach(source => {
 
-    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${source.path}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
+    const files = fileIndex[source.path] || [];
+    const list = document.getElementById(source.listId);
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
             }
-            return response.json();
-        })
-        .then(files => {
-
-            const list = document.getElementById(source.listId);
-
-            files
-                .filter(file =>
-                    source.extensions.some(ext =>
-                        file.name.toLowerCase().endsWith(ext)
-                    )
-                )
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .forEach(file => {
-
-                    const li = document.createElement("li");
-                    const a = document.createElement("a");
-
-                    const rawUrl =
-                        `https://raw.githubusercontent.com/${owner}/${repo}/main/${source.path}/${file.name}`;
-
-                    a.href = "#";
-                    a.textContent = file.name;
-
-                    a.addEventListener("click", async (e) => {
-                        e.preventDefault();
-
-                        try {
-                            const response = await fetch(rawUrl);
-
-                            if (!response.ok) {
-                                throw new Error(`HTTP ${response.status}`);
-                            }
-
-                            const blob = await response.blob();
-                            const blobUrl = URL.createObjectURL(blob);
-
-                            const downloadLink = document.createElement("a");
-                            downloadLink.href = blobUrl;
-                            downloadLink.download = file.name;
-
-                            document.body.appendChild(downloadLink);
-                            downloadLink.click();
-                            document.body.removeChild(downloadLink);
-
-                            URL.revokeObjectURL(blobUrl);
-
-                        } catch (error) {
-                            console.error(`Download failed for ${file.name}:`, error);
-                            alert(`Unable to download ${file.name}`);
-                        }
-                    });
-
-                    li.appendChild(a);
-                    list.appendChild(li);
-                });
-
-            if (list.children.length === 0) {
-                const li = document.createElement("li");
-                li.textContent = `No ${source.title} files found`;
-                list.appendChild(li);
-            }
-        })
-        .catch(error => {
-
-            console.error(`Error loading ${source.path}:`, error);
-
-            const list = document.getElementById(source.listId);
-
-            const li = document.createElement("li");
-            li.textContent =
-                `Unable to load files from ${source.path}`;
-
-            list.appendChild(li);
         });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
 });
 </script>
