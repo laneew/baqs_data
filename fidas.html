@@ -1,39 +1,83 @@
-<ul id="file-list"></ul>
+```html
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
 
 <script>
 const owner = "dcsbeddows";
 const repo = "baqs_data";
-const folder = "fidas";
 
-fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`)
-.then(r => r.json())
-.then(files => {
+const sources = [
+    {
+        path: "fidas/PM/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "fidas/PM/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
 
-    const list = document.getElementById("file-list");
+sources.forEach(source => {
 
-    files
-      .filter(f => f.name.endsWith(".csv"))
-      .sort((a,b) => a.name.localeCompare(b.name))
-      .forEach(f => {
+    fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${source.path}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(files => {
 
-          const li = document.createElement("li");
-          const a = document.createElement("a");
+            const list = document.getElementById(source.listId);
 
-          // IMPORTANT: GitHub raw file
-          const url = `https://raw.githubusercontent.com/${owner}/${repo}/main/${folder}/${f.name}`;
+            files
+                .filter(file =>
+                    source.extensions.some(ext =>
+                        file.name.toLowerCase().endsWith(ext)
+                    )
+                )
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .forEach(file => {
 
-          a.href = url;
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
 
-          // This *suggests* download instead of open
-          a.setAttribute("download", f.name);
+                    const rawUrl =
+                        `https://raw.githubusercontent.com/${owner}/${repo}/main/${source.path}/${file.name}`;
 
-          a.textContent = "Download " + f.name;
+                    a.href = rawUrl;
+                    a.download = file.name;
+                    a.textContent = file.name;
 
-          li.appendChild(a);
-          list.appendChild(li);
-      });
+                    li.appendChild(a);
+                    list.appendChild(li);
+                });
+
+            if (list.children.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = `No ${source.title} files found`;
+                list.appendChild(li);
+            }
+        })
+        .catch(error => {
+
+            console.error(`Error loading ${source.path}:`, error);
+
+            const list = document.getElementById(source.listId);
+
+            const li = document.createElement("li");
+            li.textContent =
+                `Unable to load files from ${source.path}`;
+
+            list.appendChild(li);
+        });
 });
 </script>
-
-<h2 style="color:red;">TEST UPDATE - v2</h2>
-<h2 style="color:red;">TEST UPDATE - v2</h2>
+```

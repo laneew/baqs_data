@@ -1,0 +1,36 @@
+<ul id="file-list"></ul>
+
+<script>
+const owner = "dcsbeddows";
+const repo = "baqs_data";
+const folder = "acsm";
+
+fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folder}`)
+.then(r => r.json())
+.then(files => {
+
+    const list = document.getElementById("file-list");
+
+    files
+      .filter(f => f.name.endsWith(".csv"))
+      .sort((a,b) => a.name.localeCompare(b.name))
+      .forEach(f => {
+
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+
+          // IMPORTANT: GitHub raw file
+          const url = `https://raw.githubusercontent.com/${owner}/${repo}/main/${folder}/${f.name}`;
+
+          a.href = url;
+
+          // This *suggests* download instead of open
+          a.setAttribute("download", f.name);
+
+          a.textContent = "Download " + f.name;
+
+          li.appendChild(a);
+          list.appendChild(li);
+      });
+});
+</script>

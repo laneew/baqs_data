@@ -1,0 +1,54 @@
+{
+  "title": "BAQS: SMPS PN data.",
+  "description": "Data collected using a TSI3938. Data submitted is hourly Total Particle concentration and particle size distribution from 10_nm to 800_nm. Data collected at the Birmingham Air Quality Site.",
+  "authors": [
+    {
+      "firstname": "David",
+      "surname": "Beddows"
+    },
+    {
+      "firstname": "",
+      "surname": ""
+    },
+    {
+      "firstname": "",
+      "surname": ""
+    }
+  ],
+  "bbox": {
+    "north": "52.46°",
+    "south": "\t 90°",
+    "east": "\t 180.0000°",
+    "west": "-1.93°"
+  },
+  "time_range": {
+    "start": "2022-08-24T14:00:00",
+    "end": "2026-01-30T23:59:59"
+  },
+  "lineage": "1. Data collected at the Birmingham Air Quality Site in minute intervals.",
+  "quality": "2. Raw data collected outside of the operating parameters of the instrument were removed.
+              3. Data (with 75% coverage per hour) was averaged up into 1 hourly steps.
+              0b not_used;              1b good;              2b bad;              3b suspect_data;              4b local_unusual_activity; 5b strong_nucleation_event",
+  "docs": [],
+  "project": {
+    "catalogue_url": "",
+    "title": "Birmingham Air Quality Supersite (BAQS)",
+    "description": "Air Quality Supersite Operation (2948548)",
+    "PI": {
+      "firstname": "Roy",
+      "lastname": "Harrison"
+    },
+    "funder": "DEFRA",
+    "grant_number": "2948548"
+  },
+  "instrument": {
+    "catalogue_url": "",
+    "title": "BAQS: TSI_SMPS3938",
+    "description": "Scanning Mobility Particle Size, comprising of: an electrostactic classifier witha 3083 DMA; Kr 380MBeq neutraliser and 3750 CPC.  Device samplies through a TSI Sampling System for Atmospheric Particles 3750200. Sample dried to below 40 percent RH."
+  },
+  "computation": {
+    "catalogue_url": "",
+    "title": "",
+    "description": ""
+  }
+}
