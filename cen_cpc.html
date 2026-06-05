@@ -1,0 +1,160 @@
+<h1>CEN-CPC Concensation Particle Counter (number/cm<sup>3</sup>)</h1>
+
+Da_50 = 10nm.
+
+<ul>
+    <li>PN</li>
+</ul>
+
+[Flags: 0b - No data; 1b - Good Data; 2b - Bad Data; 3b - Suspect; 4b - Local Influence.]
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
+
+<script>
+const sources = [
+    {
+        path: "cen_cpc/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "cen_cpc/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
+
+/*
+  IMPORTANT:
+  No GitHub API used anymore.
+  You maintain file lists manually here.
+*/
+const fileIndex = {
+    "fidas/PM/csv": [
+        // Add CSV filenames here
+	"BAQS_CENCPC_TPN_202612_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202611_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202610_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202609_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202608_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202607_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202606_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202605_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202604_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202603_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202602_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202601_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202512_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202511_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202510_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202509_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202508_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202507_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202506_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202505_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202504_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202503_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202502_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202501_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202412_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202411_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202410_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202409_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202408_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202407_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202406_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202405_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202404_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202403_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202402_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202401_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202312_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202311_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202310_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202309_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202308_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202307_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202306_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202305_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202304_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202303_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202302_hour_v1.1.csv",
+	"BAQS_CENCPC_TPN_202301_hour_v1.1.csv"
+    ],
+    "fidas/PM/netcdf": [
+        // Add NetCDF filenames here
+		
+    ]
+};
+
+sources.forEach(source => {
+
+    const list = document.getElementById(source.listId);
+    const files = fileIndex[source.path] || [];
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
+            }
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+});
+</script>
