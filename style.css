@@ -1,3 +1,34 @@
-<li class="spacer">
-    <a href="live_data.html">Live DATA Test Page</a>
-</li>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    margin: 6px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #1a73e8;
+    font-size: 18px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.spacer {
+    margin-top: 40px;
+}
