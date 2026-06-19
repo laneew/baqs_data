@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>LIVE DATA</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVE DATA</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,31 +14,7 @@
         h1 {
             margin-bottom: 20px;
         }
-
-        p {
-            margin-bottom: 10px;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin: 6px 0;
-        }
-		
-        a {
-            text-decoration: none;
-            color: #1a73e8;
-            font-size: 18px;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
-</head>
-
 </head>
 
 <body>
@@ -49,11 +27,14 @@
 fetch("data.json")
   .then(response => response.json())
   .then(data => {
+      document.getElementById("time").textContent = data.time;
+  })
+  .catch(error => {
       document.getElementById("time").textContent =
-          data.time;
+          "Unable to load data";
+      console.error(error);
   });
 </script>
 
 </body>
-
 </html>
