@@ -7,6 +7,9 @@ async function loadData() {
         const response = await fetch(
             "fidas/PM/netcdf/BAQS_FIDAS_PM_concentration_201905_Ratified_v2.2.nc"
         );
+		
+		const text = await response.clone().text();
+		console.log(text.substring(0,500));
 
         console.log("Response status:", response.status);
 
