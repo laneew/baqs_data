@@ -1,29 +1,17 @@
-<script type="module">
-import { NetCDFReader } from "https://cdn.jsdelivr.net/npm/netcdfjs/+esm";
+const response = await fetch(
+  "fidas/PM/netcdf/BAQS_FIDAS_PM_concentration_201905_Ratified_v2.2.nc"
+);
 
-async function loadData() {
-    try {
+console.log("Status:", response.status);
+console.log("Content-Type:", response.headers.get("content-type"));
 
-        const response = await fetch(
-            "fidas/PM/netcdf/BAQS_FIDAS_PM_concentration_201905_Ratified_v2.2.nc"
-        );
-		
-		const text = await response.clone().text();
-		console.log(text.substring(0,500));
+const buffer = await response.arrayBuffer();
 
-        console.log("Response status:", response.status);
+// Look at first 16 bytes
+const bytes = new Uint8Array(buffer.slice(0, 16));
 
-        const buffer = await response.arrayBuffer();
-
-        window.reader = new NetCDFReader(buffer);
-
-        console.log("Reader:", window.reader);
-        console.log("Variables:", window.reader.variables);
-
-    } catch (err) {
-        console.error("ERROR:", err);
-    }
-}
-
-loadData();
-</script>
+console.log(
+  Array.from(bytes)
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join(" ")
+);
