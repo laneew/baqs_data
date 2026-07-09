@@ -1,0 +1,259 @@
+<h1>Teledyne T500U NO2 (ppb)</h1>
+
+[Flags: 0b - No data; 1b - Good Data; 2b - Bad Data; 3b - Suspect; 4b - Local Influence; 5b - No data OR Bad data.]
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
+
+<script>
+const sources = [
+    {
+        path: "teledyne_T500U/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "teledyne_T500U/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
+
+/*
+  IMPORTANT:
+  No GitHub API used anymore.
+  You maintain file lists manually here.
+*/
+const fileIndex = {
+    "teledyne_T500U/csv": [
+        // Add CSV filenames here
+		"BAQS_NO2_201910_hour_v1.1.csv",
+		"BAQS_NO2_201911_hour_v1.1.csv",
+		"BAQS_NO2_201912_hour_v1.1.csv",
+		"BAQS_NO2_202001_hour_v1.1.csv",
+		"BAQS_NO2_202002_hour_v1.1.csv",
+		"BAQS_NO2_202003_hour_v1.1.csv",
+		"BAQS_NO2_202004_hour_v1.1.csv",
+		"BAQS_NO2_202005_hour_v1.1.csv",
+		"BAQS_NO2_202006_hour_v1.1.csv",
+		"BAQS_NO2_202007_hour_v1.1.csv",
+		"BAQS_NO2_202008_hour_v1.1.csv",
+		"BAQS_NO2_202009_hour_v1.1.csv",
+		"BAQS_NO2_202010_hour_v1.1.csv",
+		"BAQS_NO2_202011_hour_v1.1.csv",
+		"BAQS_NO2_202012_hour_v1.1.csv",
+		"BAQS_NO2_202101_hour_v1.1.csv",
+		"BAQS_NO2_202102_hour_v1.1.csv",
+		"BAQS_NO2_202103_hour_v1.1.csv",
+		"BAQS_NO2_202104_hour_v1.1.csv",
+		"BAQS_NO2_202105_hour_v1.1.csv",
+		"BAQS_NO2_202106_hour_v1.1.csv",
+		"BAQS_NO2_202107_hour_v1.1.csv",
+		"BAQS_NO2_202108_hour_v1.1.csv",
+		"BAQS_NO2_202109_hour_v1.1.csv",
+		"BAQS_NO2_202110_hour_v1.1.csv",
+		"BAQS_NO2_202111_hour_v1.1.csv",
+		"BAQS_NO2_202112_hour_v1.1.csv",
+		"BAQS_NO2_202201_hour_v1.1.csv",
+		"BAQS_NO2_202202_hour_v1.1.csv",
+		"BAQS_NO2_202203_hour_v1.1.csv",
+		"BAQS_NO2_202204_hour_v1.1.csv",
+		"BAQS_NO2_202205_hour_v1.1.csv",
+		"BAQS_NO2_202206_hour_v1.1.csv",
+		"BAQS_NO2_202207_hour_v1.1.csv",
+		"BAQS_NO2_202208_hour_v1.1.csv",
+		"BAQS_NO2_202209_hour_v1.1.csv",
+		"BAQS_NO2_202210_hour_v1.1.csv",
+		"BAQS_NO2_202211_hour_v1.1.csv",
+		"BAQS_NO2_202212_hour_v1.1.csv",
+		"BAQS_NO2_202301_hour_v1.1.csv",
+		"BAQS_NO2_202302_hour_v1.1.csv",
+		"BAQS_NO2_202303_hour_v1.1.csv",
+		"BAQS_NO2_202304_hour_v1.1.csv",
+		"BAQS_NO2_202305_hour_v1.1.csv",
+		"BAQS_NO2_202306_hour_v1.1.csv",
+		"BAQS_NO2_202307_hour_v1.1.csv",
+		"BAQS_NO2_202308_hour_v1.1.csv",
+		"BAQS_NO2_202309_hour_v1.1.csv",
+		"BAQS_NO2_202311_hour_v1.1.csv",
+		"BAQS_NO2_202312_hour_v1.1.csv",
+		"BAQS_NO2_202401_hour_v1.1.csv",
+		"BAQS_NO2_202402_hour_v1.1.csv",
+		"BAQS_NO2_202403_hour_v1.1.csv",
+		"BAQS_NO2_202404_hour_v1.1.csv",
+		"BAQS_NO2_202405_hour_v1.1.csv",
+		"BAQS_NO2_202406_hour_v1.1.csv",
+		"BAQS_NO2_202407_hour_v1.1.csv",
+		"BAQS_NO2_202408_hour_v1.1.csv",
+		"BAQS_NO2_202409_hour_v1.1.csv",
+		"BAQS_NO2_202410_hour_v1.1.csv",
+		"BAQS_NO2_202411_hour_v1.1.csv",
+		"BAQS_NO2_202412_hour_v1.1.csv",
+		"BAQS_NO2_202501_hour_v1.1.csv",
+		"BAQS_NO2_202502_hour_v1.1.csv",
+		"BAQS_NO2_202503_hour_v1.1.csv",
+		"BAQS_NO2_202504_hour_v1.1.csv",
+		"BAQS_NO2_202505_hour_v1.1.csv",
+		"BAQS_NO2_202506_hour_v1.1.csv",
+		"BAQS_NO2_202507_hour_v1.1.csv",
+		"BAQS_NO2_202508_hour_v1.1.csv",
+		"BAQS_NO2_202509_hour_v1.1.csv",
+		"BAQS_NO2_202510_hour_v1.1.csv",
+		"BAQS_NO2_202511_hour_v1.1.csv",
+		"BAQS_NO2_202512_hour_v1.1.csv",
+		"BAQS_NO2_202601_hour_v1.1.csv",
+		"BAQS_NO2_202604_hour_v1.1.csv",
+		"BAQS_NO2_202605_hour_v1.1.csv"
+    ],
+    "teledyne_T500U/netcdf": [
+        // Add NetCDF filenames here
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_201910_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_201911_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_201912_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202001_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202002_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202003_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202004_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202005_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202006_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202007_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202008_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202009_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202010_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202011_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202012_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202101_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202102_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202103_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202104_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202105_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202106_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202107_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202108_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202109_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202110_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202111_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202112_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202201_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202202_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202203_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202204_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202205_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202206_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202207_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202208_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202209_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202210_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202211_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202212_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202301_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202302_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202303_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202304_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202305_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202306_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202307_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202308_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202309_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202311_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202312_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202401_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202402_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202403_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202404_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202405_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202406_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202407_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202408_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202409_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202410_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202411_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202412_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202501_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202502_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202503_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202504_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202505_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202506_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202507_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202508_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202509_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202510_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202511_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202512_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202601_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202604_Ratified_v2.2.nc",
+		"BAQS_Teledyne_T500U_CAPS_NO2_concentration_202605_Ratified_v2.2.nc"
+    ]
+};
+
+sources.forEach(source => {
+
+    const list = document.getElementById(source.listId);
+    const files = fileIndex[source.path] || [];
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
+            }
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+});
+</script>
