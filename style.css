@@ -84,3 +84,8 @@ footer {
 .gas-panel {
     margin-top: 40px;
 }
+
+sub {
+    vertical-align: baseline;
+    font-size: 100%;
+}
