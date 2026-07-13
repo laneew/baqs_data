@@ -1,0 +1,230 @@
+<h1>LGR EAA NH<sub>3</sub> (ppb)</h1>
+
+[Flags: 0b - No data; 1b - Good Data; 2b - Bad Data; 3b - Suspect; 4b - Local Influence; 5b - No data OR Bad data.]
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
+
+<script>
+const sources = [
+    {
+        path: "lgr_eaa/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "lgr_eaa/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
+
+/*
+  IMPORTANT:
+  No GitHub API used anymore.
+  You maintain file lists manually here.
+*/
+const fileIndex = {
+    "lgr_eaa/csv": [
+        // Add CSV filenames here
+			"BAQS_NH3_202001_hour_v1.1.csv",
+			"BAQS_NH3_202002_hour_v1.1.csv",
+			"BAQS_NH3_202003_hour_v1.1.csv",
+			"BAQS_NH3_202004_hour_v1.1.csv",
+			"BAQS_NH3_202005_hour_v1.1.csv",
+			"BAQS_NH3_202006_hour_v1.1.csv",
+			"BAQS_NH3_202007_hour_v1.1.csv",
+			"BAQS_NH3_202008_hour_v1.1.csv",
+			"BAQS_NH3_202009_hour_v1.1.csv",
+			"BAQS_NH3_202010_hour_v1.1.csv",
+			"BAQS_NH3_202011_hour_v1.1.csv",
+			"BAQS_NH3_202012_hour_v1.1.csv",
+			"BAQS_NH3_202101_hour_v1.1.csv",
+			"BAQS_NH3_202102_hour_v1.1.csv",
+			"BAQS_NH3_202103_hour_v1.1.csv",
+			"BAQS_NH3_202104_hour_v1.1.csv",
+			"BAQS_NH3_202105_hour_v1.1.csv",
+			"BAQS_NH3_202106_hour_v1.1.csv",
+			"BAQS_NH3_202107_hour_v1.1.csv",
+			"BAQS_NH3_202108_hour_v1.1.csv",
+			"BAQS_NH3_202109_hour_v1.1.csv",
+			"BAQS_NH3_202110_hour_v1.1.csv",
+			"BAQS_NH3_202111_hour_v1.1.csv",
+			"BAQS_NH3_202112_hour_v1.1.csv",
+			"BAQS_NH3_202201_hour_v1.1.csv",
+			"BAQS_NH3_202202_hour_v1.1.csv",
+			"BAQS_NH3_202203_hour_v1.1.csv",
+			"BAQS_NH3_202204_hour_v1.1.csv",
+			"BAQS_NH3_202205_hour_v1.1.csv",
+			"BAQS_NH3_202206_hour_v1.1.csv",
+			"BAQS_NH3_202207_hour_v1.1.csv",
+			"BAQS_NH3_202208_hour_v1.1.csv",
+			"BAQS_NH3_202209_hour_v1.1.csv",
+			"BAQS_NH3_202210_hour_v1.1.csv",
+			"BAQS_NH3_202211_hour_v1.1.csv",
+			"BAQS_NH3_202212_hour_v1.1.csv",
+			"BAQS_NH3_202301_hour_v1.1.csv",
+			"BAQS_NH3_202302_hour_v1.1.csv",
+			"BAQS_NH3_202303_hour_v1.1.csv",
+			"BAQS_NH3_202304_hour_v1.1.csv",
+			"BAQS_NH3_202305_hour_v1.1.csv",
+			"BAQS_NH3_202306_hour_v1.1.csv",
+			"BAQS_NH3_202307_hour_v1.1.csv",
+			"BAQS_NH3_202308_hour_v1.1.csv",
+			"BAQS_NH3_202309_hour_v1.1.csv",
+			"BAQS_NH3_202310_hour_v1.1.csv",
+			"BAQS_NH3_202311_hour_v1.1.csv",
+			"BAQS_NH3_202312_hour_v1.1.csv",
+			"BAQS_NH3_202401_hour_v1.1.csv",
+			"BAQS_NH3_202402_hour_v1.1.csv",
+			"BAQS_NH3_202403_hour_v1.1.csv",
+			"BAQS_NH3_202404_hour_v1.1.csv",
+			"BAQS_NH3_202405_hour_v1.1.csv",
+			"BAQS_NH3_202406_hour_v1.1.csv",
+			"BAQS_NH3_202407_hour_v1.1.csv",
+			"BAQS_NH3_202408_hour_v1.1.csv",
+			"BAQS_NH3_202409_hour_v1.1.csv",
+			"BAQS_NH3_202410_hour_v1.1.csv",
+			"BAQS_NH3_202411_hour_v1.1.csv",
+			"BAQS_NH3_202412_hour_v1.1.csv",
+			"BAQS_NH3_202501_hour_v1.1.csv",
+			"BAQS_NH3_202502_hour_v1.1.csv",
+			"BAQS_NH3_202503_hour_v1.1.csv",
+			"BAQS_NH3_202504_hour_v1.1.csv",
+			"BAQS_NH3_202507_hour_v1.1.csv"
+    ],
+    "lgr_eaa/netcdf": [
+        // Add NetCDF filenames here
+		"BAQS_LGR_NH3_concentration_202001_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202002_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202003_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202004_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202005_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202006_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202007_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202008_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202009_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202010_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202011_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202012_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202101_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202102_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202103_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202104_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202105_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202106_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202107_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202108_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202109_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202110_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202111_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202112_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202201_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202202_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202203_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202204_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202205_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202206_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202207_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202208_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202209_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202210_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202211_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202212_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202301_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202302_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202303_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202304_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202305_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202306_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202307_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202308_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202309_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202311_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202312_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202401_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202402_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202403_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202405_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202406_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202407_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202408_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202410_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202411_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202412_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202502_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202504_Ratified_v2.2.nc",
+		"BAQS_LGR_NH3_concentration_202507_Ratified_v2.2.nc"
+    ]
+};
+
+sources.forEach(source => {
+
+    const list = document.getElementById(source.listId);
+    const files = fileIndex[source.path] || [];
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
+            }
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+});
+</script>
