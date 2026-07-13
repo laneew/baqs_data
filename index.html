@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Data Repository for Birmingham Air Quality Site (BAQS)</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Repository for Birmingham Air Quality Site (BAQS)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<main>
-    <h1>Data Repository for Birmingham Air Quality Site (BAQS)</h1>
+<header>
+    <h1>Data Repository</h1>
+    <p>Birmingham Air Quality Site (BAQS)</p>
+</header>
 
-    <p>Click on the links below to access the data:</p>
+<main class="container">
 
-    <ul>
-        <li><a href="acsm.html">ACSM</a></li>
-        <li><a href="ae33.html">AE33</a></li>
-	    <li><a href="cencpc.html">CEN CPC</a></li>
-        <li><a href="fidas_pm.html">FIDAS_PM</a></li>
-        <li><a href="fidas_pn.html">FIDAS_PN</a></li>
-        <li><a href="smps.html">SMPS</a></li>
-        <li class="spacer"><a href="live_data.html">Live DATA Test Page</a></li>
-    </ul>
+    <div class="panel particle-panel">
+        <h2>Particle Instruments</h2>
+
+        <div class="links">
+            <a href="acsm.html">Aerodyne Q-ToF ACSM</a>
+            <a href="ae33.html">Magee AE33</a>
+            <a href="cencpc.html">TSI 3750 CEN CPC</a>
+            <a href="fidas_pm.html">FIDAS 200E (PM)</a>
+            <a href="fidas_pn.html">FIDAS 200E (PN)</a>
+            <a href="smps.html">TSI 3938 SMPS</a>
+        </div>
+    </div>
+
+    <div class="panel gas-panel">
+        <h2>Gas Instruments</h2>
+
+        <div class="links">
+            <a href="teledyne_T200U.html">Teledyne T200U (NO/NO<sub>y</sub>)</a>
+            <a href="teledyne_T500U.html">Teledyne T500U (NO<sub>2</sub>)</a>
+			<a href="teledyne_T100.html">Teledyne T100 (SO<sub>2</sub>)</a> 
+			<a href="thermo_49i.html">Thermo Scientific 49i (O<sub>3</sub>)</a>              			
+		</div>
+    </div>
+
+    <div class="panel gas-panel">
+        <h2>Meteorological Instruments</h2>
+
+        <div class="links">
+            <a href="fidas_met.html">Fidas Meteorology</a> 
+            <a href="sonic.html">WINDMASTER Sonic Anemometer</a>             						
+		</div>
+    </div>
+
 </main>
+
+
+<footer>
+    Birmingham Air Quality Site (BAQS)
+</footer>
 
 </body>
 </html>

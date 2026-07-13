@@ -1,0 +1,260 @@
+<h1>FIDAS Meteorological Data</h1>
+
+<ul>
+	<li>RH (%)</li>
+	<li>Temperature (C)</li>
+	<li>Station Level Pressure (hPa)</li>
+	<li>MSLP (hPa)</li>
+</ul>
+
+[Auxilary Data: Not Ratified.]
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
+
+<script>
+const sources = [
+    {
+        path: "fidas/MET/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "fidas/MET/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
+
+/*
+  IMPORTANT:
+  No GitHub API used anymore.
+  You maintain file lists manually here.
+*/
+const fileIndex = {
+    "fidas/MET/csv": [
+        // Add CSV filenames here
+		"Fidas_Met_2019-03_hour.csv",
+		"Fidas_Met_2019-04_hour.csv",
+		"Fidas_Met_2019-05_hour.csv",
+		"Fidas_Met_2019-06_hour.csv",
+		"Fidas_Met_2019-07_hour.csv",
+		"Fidas_Met_2019-08_hour.csv",
+		"Fidas_Met_2019-09_hour.csv",
+		"Fidas_Met_2019-10_hour.csv",
+		"Fidas_Met_2019-11_hour.csv",
+		"Fidas_Met_2019-12_hour.csv",
+		"Fidas_Met_2020-01_hour.csv",
+		"Fidas_Met_2020-02_hour.csv",
+		"Fidas_Met_2020-03_hour.csv",
+		"Fidas_Met_2020-04_hour.csv",
+		"Fidas_Met_2020-05_hour.csv",
+		"Fidas_Met_2020-06_hour.csv",
+		"Fidas_Met_2020-07_hour.csv",
+		"Fidas_Met_2020-08_hour.csv",
+		"Fidas_Met_2020-09_hour.csv",
+		"Fidas_Met_2020-10_hour.csv",
+		"Fidas_Met_2020-11_hour.csv",
+		"Fidas_Met_2020-12_hour.csv",
+		"Fidas_Met_2021-01_hour.csv",
+		"Fidas_Met_2021-02_hour.csv",
+		"Fidas_Met_2021-03_hour.csv",
+		"Fidas_Met_2021-04_hour.csv",
+		"Fidas_Met_2021-05_hour.csv",
+		"Fidas_Met_2021-06_hour.csv",
+		"Fidas_Met_2021-07_hour.csv",
+		"Fidas_Met_2022-04_hour.csv",
+		"Fidas_Met_2022-05_hour.csv",
+		"Fidas_Met_2022-06_hour.csv",
+		"Fidas_Met_2022-07_hour.csv",
+		"Fidas_Met_2022-08_hour.csv",
+		"Fidas_Met_2022-09_hour.csv",
+		"Fidas_Met_2022-10_hour.csv",
+		"Fidas_Met_2022-11_hour.csv",
+		"Fidas_Met_2022-12_hour.csv",
+		"Fidas_Met_2023-01_hour.csv",
+		"Fidas_Met_2023-02_hour.csv",
+		"Fidas_Met_2023-03_hour.csv",
+		"Fidas_Met_2023-04_hour.csv",
+		"Fidas_Met_2023-05_hour.csv",
+		"Fidas_Met_2023-09_hour.csv",
+		"Fidas_Met_2023-10_hour.csv",
+		"Fidas_Met_2023-11_hour.csv",
+		"Fidas_Met_2023-12_hour.csv",
+		"Fidas_Met_2024-01_hour.csv",
+		"Fidas_Met_2024-02_hour.csv",
+		"Fidas_Met_2024-03_hour.csv",
+		"Fidas_Met_2024-04_hour.csv",
+		"Fidas_Met_2024-05_hour.csv",
+		"Fidas_Met_2024-06_hour.csv",
+		"Fidas_Met_2024-07_hour.csv",
+		"Fidas_Met_2024-08_hour.csv",
+		"Fidas_Met_2024-09_hour.csv",
+		"Fidas_Met_2024-10_hour.csv",
+		"Fidas_Met_2024-11_hour.csv",
+		"Fidas_Met_2024-12_hour.csv",
+		"Fidas_Met_2025-01_hour.csv",
+		"Fidas_Met_2025-02_hour.csv",
+		"Fidas_Met_2025-03_hour.csv",
+		"Fidas_Met_2025-04_hour.csv",
+		"Fidas_Met_2025-05_hour.csv",
+		"Fidas_Met_2025-06_hour.csv",
+		"Fidas_Met_2025-07_hour.csv",
+		"Fidas_Met_2025-08_hour.csv",
+		"Fidas_Met_2025-09_hour.csv",
+		"Fidas_Met_2025-10_hour.csv",
+		"Fidas_Met_2025-11_hour.csv",
+		"Fidas_Met_2025-12_hour.csv",
+		"Fidas_Met_2026-01_hour.csv",
+		"Fidas_Met_2026-02_hour.csv",
+		"Fidas_Met_2026-03_hour.csv",
+		"Fidas_Met_2026-04_hour.csv",
+		"Fidas_Met_2026-05_hour.csv",
+		"Fidas_Met_2026-06_hour.csv"
+    ],
+    "fidas/MET/netcdf": [
+        // Add NetCDF filenames here
+		"BAQS_FIDAS_MET_Data_201903_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201905_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201906_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201907_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201908_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201909_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201910_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201911_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_201912_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202001_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202002_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202003_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202004_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202005_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202006_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202007_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202008_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202009_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202011_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202012_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202101_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202102_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202103_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202104_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202105_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202106_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202203_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202204_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202205_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202206_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202207_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202208_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202209_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202211_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202212_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202301_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202302_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202303_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202304_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202308_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202310_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202311_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202312_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202401_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202402_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202403_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202404_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_Met_Data_202405_Not_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202406_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202407_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202408_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202409_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202411_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202412_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202501_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202502_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202503_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202504_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202505_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202506_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202507_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202508_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202509_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202510_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202511_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202512_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202601_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202603_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202604_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202605_NOT_Ratified_v2.2.nc",
+		"BAQS_FIDAS_MET_Data_202606_NOT_Ratified_v2.2.nc"
+    ]
+};
+
+sources.forEach(source => {
+
+    const list = document.getElementById(source.listId);
+    const files = fileIndex[source.path] || [];
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
+            }
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+});
+</script>

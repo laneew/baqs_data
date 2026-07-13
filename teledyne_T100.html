@@ -1,0 +1,141 @@
+<h1>Teledyne T100 SO<sub>2</sub> (ppb)</h1>
+
+[Flags: 0b - No data; 1b - Good Data; 2b - Bad Data; 3b - Suspect; 4b - Local Influence; 5b - No data OR Bad data.]
+
+<h2>CSV Files</h2>
+<ul id="csv-file-list"></ul>
+
+<h2>NetCDF Files</h2>
+<ul id="netcdf-file-list"></ul>
+
+<script>
+const sources = [
+    {
+        path: "teledyne_T100/csv",
+        extensions: [".csv"],
+        listId: "csv-file-list",
+        title: "CSV"
+    },
+    {
+        path: "teledyne_T100/netcdf",
+        extensions: [".nc", ".nc4", ".cdf"],
+        listId: "netcdf-file-list",
+        title: "NetCDF"
+    }
+];
+
+/*
+  IMPORTANT:
+  No GitHub API used anymore.
+  You maintain file lists manually here.
+*/
+const fileIndex = {
+    "teledyne_T100/csv": [
+        // Add CSV filenames here
+		"BAQS_SO2_202601_hour_v1.1.csv",
+		"BAQS_SO2_202509_hour_v1.1.csv",
+		"BAQS_SO2_202508_hour_v1.1.csv",
+		"BAQS_SO2_202507_hour_v1.1.csv",
+		"BAQS_SO2_202506_hour_v1.1.csv",
+		"BAQS_SO2_202505_hour_v1.1.csv",
+		"BAQS_SO2_202504_hour_v1.1.csv",
+		"BAQS_SO2_202503_hour_v1.1.csv",
+		"BAQS_SO2_202502_hour_v1.1.csv",
+		"BAQS_SO2_202501_hour_v1.1.csv",
+		"BAQS_SO2_202412_hour_v1.1.csv",
+		"BAQS_SO2_202411_hour_v1.1.csv",
+		"BAQS_SO2_202410_hour_v1.1.csv",
+		"BAQS_SO2_202409_hour_v1.1.csv",
+		"BAQS_SO2_202408_hour_v1.1.csv",
+		"BAQS_SO2_202407_hour_v1.1.csv",
+		"BAQS_SO2_202406_hour_v1.1.csv",
+		"BAQS_SO2_202405_hour_v1.1.csv"
+    ],
+    "teledyne_T100/netcdf": [
+        // Add NetCDF filenames here
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202405_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202406_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202407_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202408_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202409_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202410_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202411_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202412_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202501_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202502_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202503_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202504_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202505_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202506_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202507_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202508_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202509_Ratified_v2.2.nc",
+		"BAQS_Thermo_Scientific_49i_SO2_concentration_202601_Ratified_v2.2.nc"
+    ]
+};
+
+sources.forEach(source => {
+
+    const list = document.getElementById(source.listId);
+    const files = fileIndex[source.path] || [];
+
+    const filtered = files
+        .filter(file =>
+            source.extensions.some(ext =>
+                file.toLowerCase().endsWith(ext)
+            )
+        )
+        .sort();
+
+    if (filtered.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = `No ${source.title} files found`;
+        list.appendChild(li);
+        return;
+    }
+
+    filtered.forEach(file => {
+
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+
+        const rawUrl =
+            `https://raw.githubusercontent.com/dcsbeddows/baqs_data/main/${source.path}/${file}`;
+
+        a.href = "#";
+        a.textContent = file;
+
+        a.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const response = await fetch(rawUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement("a");
+                downloadLink.href = blobUrl;
+                downloadLink.download = file;
+
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+
+                URL.revokeObjectURL(blobUrl);
+
+            } catch (error) {
+                console.error(`Download failed for ${file}:`, error);
+                alert(`Unable to download ${file}`);
+            }
+        });
+
+        li.appendChild(a);
+        list.appendChild(li);
+    });
+});
+</script>
